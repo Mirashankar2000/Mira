@@ -1,0 +1,119 @@
+#include <stdio.h>
+void add();
+void admin();
+void book(int);
+char name[10][20],c[10][20];
+int id[10],ph[10],stat[10],sucess[10];
+int i=0,j,cap,t,count=0;
+int main()
+{
+    int n;
+    for(int i=0;i<2;i++)
+    {
+    printf("enter your option :1.Add 2.Admin\n");
+    scanf("%d",&n);
+    switch(n)
+    {
+        case 1:
+        {
+            add();
+            break;
+        }
+        case 2:
+        {
+            admin();
+            break;
+        }
+        
+    }
+    }
+    return 0;
+}
+void add()
+{  
+    int k,flag=0;
+    printf("how many bookings you want to do:");
+    scanf("%d",&cap);
+        for(j=0;j<cap;j++)
+        {
+        printf("enter your name:\n");
+        scanf("%s",name[j]);
+        }
+        for(j=0;j<cap;j++)
+        {
+        printf("enter your phone number:\n");
+        scanf("%d",&ph[j]);
+        }
+        for(j=0;j<cap;j++)
+        {
+        printf("enter your city :\n");
+        scanf("%s",c[j]);
+        }
+        for(j=0;j<cap;j++)
+        {
+        stat[j]=0;
+        }
+        for(j=0;j<cap;j++)
+        {
+        printf("enter your unique ID:\n");
+        scanf("%d",&id[j]);
+        k=j-1;
+        while(j>0 && k>=0)
+        {
+            flag=0;
+            if(id[k]==id[j])
+            {
+                printf("Error.Please check the details.Your id is not registered\n");
+                flag=1;
+                sucess[j]=0;
+                break;
+            }
+            k--;
+        }
+        if(flag==0)
+        {
+            printf("sucessfully registered\n");
+            sucess[j]=1;
+            count++;
+            
+        }
+        }
+        
+}
+void admin(int t)
+{ 
+    for(int m=0;m<count;m++)
+    {
+    printf("enter the customer unique id for which you have to change the status\n");
+    scanf("%d",&t);
+    for(j=0;j<cap;j++)
+    {
+          if(id[j]==t)
+          {
+          if(sucess[j]==1)
+          {
+         printf("\n details of customer before changing the status\n");
+         printf("%s\n",name[j]);
+         printf("%d\n",ph[j]);
+         printf("%s\n",c[j]);
+         printf("%d\n",id[j]);
+          printf("%d\n",stat[j]);
+         if(stat[j]==0)
+         {
+             book(j);
+         }
+        printf("\n details of customer after changing the status\n");
+         printf("%s\n",name[j]);
+         printf("%d\n",ph[j]);
+         printf("%s\n",c[j]);
+         printf("%d\n",id[j]);
+          printf("%d\n",stat[j]);
+          }
+          }
+    }
+    }
+}
+void book(int j)
+{
+    stat[j]=1;
+}
